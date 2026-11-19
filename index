@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Minha Cor para o Ano Novo</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #20102f, #58336f, #b18ac4);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    width: 100%;
+    max-width: 480px;
+    padding: 35px;
+    border-radius: 22px;
+    text-align: center;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.3);
+}
+
+h1 {
+    color: #58336f;
+    font-size: 27px;
+    margin-bottom: 10px;
+}
+
+.subtitulo {
+    color: #777;
+    margin-bottom: 28px;
+    line-height: 1.5;
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    color: #444;
+    margin: 15px 0 7px;
+}
+
+input {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #713e88;
+    color: white;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #4c285e;
+    transform: scale(1.02);
+}
+
+#resultado {
+    display: none;
+    margin-top: 30px;
+    padding: 22px;
+    border-radius: 15px;
+    background: #f8f4fa;
+}
+
+.numero {
+    font-size: 55px;
+    font-weight: bold;
+    color: #58336f;
+}
+
+.amostra-cor {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    margin: 18px auto;
+    border: 5px solid white;
+    box-shadow: 0 3px 12px #bbb;
+}
+
+.nome-cor {
+    font-size: 23px;
+    font-weight: bold;
+    color: #58336f;
+    margin-bottom: 12px;
+}
+
+.significado {
+    color: #555;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+.frase {
+    margin-top: 18px;
+    color: #8b609e;
+    font-style: italic;
+    font-size: 14px;
+}
+
+footer {
+    margin-top: 25px;
+    color: #999;
+    font-size: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>✨ Minha Cor para o Ano Novo ✨</h1>
+
+    <p class="subtitulo">
+        Descubra sua cor da numerologia e a energia
+        que ela representa para o próximo ano!
+    </p>
+
+    <label for="dia">Dia do seu aniversário</label>
+    <input type="number" id="dia"
+           placeholder="Exemplo: 25"
+           min="1" max="31">
+
+    <label for="mes">Mês do seu aniversário</label>
+    <input type="number" id="mes"
+           placeholder="Exemplo: 8"
+           min="1" max="12">
+
+    <label for="ano">Ano novo</label>
+    <input type="number" id="ano">
+
+    <button onclick="calcularNumerologia()">
+        Descobrir minha cor ✨
+    </button>
+
+    <div id="resultado">
+
+        <p>Sua vibração numerológica é:</p>
+
+        <div class="numero" id="numero"></div>
+
+        <div class="amostra-cor" id="amostra"></div>
+
+        <div class="nome-cor" id="nomeCor"></div>
+
+        <p class="significado" id="significado"></p>
+
+        <p class="frase" id="frase"></p>
+
+    </div>
+
+    <footer>
+        Numerologia das cores • Seu novo ano começa com uma nova energia.
+    </footer>
+
+</div>
+
+<script>
+
+// Preenche automaticamente com o próximo ano
+document.getElementById("ano").value =
+    new Date().getFullYear() + 1;
+
+
+// Tabela de cores da numerologia
+const cores = {
+
+    1: {
+        nome: "Vermelho",
+        cor: "#e53935",
+        significado: "Liderança, coragem, iniciativa e novos começos.",
+        frase: "Um ano para ter coragem e iniciar novos caminhos!"
+    },
+
+    2: {
+        nome: "Laranja",
+        cor: "#ff8c22",
+        significado: "Parcerias, sensibilidade, cooperação e equilíbrio emocional.",
+        frase: "Um ano para cultivar relacionamentos e conexões!"
+    },
+
+    3: {
+        nome: "Amarelo",
+        cor: "#fdd835",
+        significado: "Criatividade, comunicação, alegria e expressão pessoal.",
+        frase: "Um ano para brilhar, criar e expressar sua essência!"
+    },
+
+    4: {
+        nome: "Verde",
+        cor: "#43a047",
+        significado: "Estabilidade, trabalho, disciplina e segurança.",
+        frase: "Um ano para construir bases sólidas!"
+    },
+
+    5: {
+        nome: "Azul Claro / Turquesa",
+        cor: "#40c4c8",
+        significado: "Liberdade, movimento, mudanças e versatilidade.",
+        frase: "Um ano para viver novas experiências!"
+    },
+
+    6: {
+        nome: "Azul Escuro / Índigo / Rosa",
+        cor: "#3949ab",
+        significado: "Amor, família, cuidado, harmonia e responsabilidade afetiva.",
+        frase: "Um ano para fortalecer o amor e os laços afetivos!"
+    },
+
+    7: {
+        nome: "Violeta / Lilás",
+        cor: "#9c27b0",
+        significado: "Introspecção, espiritualidade, sabedoria e intuição.",
+        frase: "Um ano para olhar para dentro e desenvolver sua sabedoria!"
+    },
+
+    8: {
+        nome: "Dourado / Rosa / Marrom",
+        cor: "#c69b28",
+        significado: "Poder pessoal, prosperidade, sucesso material e autoridade.",
+        frase: "Um ano para buscar prosperidade e realizar conquistas!"
+    },
+
+    9: {
+        nome: "Branco / Dourado",
+        cor: "#eee5c9",
+        significado: "Compaixão, universalidade, encerramento de ciclos e sabedoria.",
+        frase: "Um ano para renovar, concluir ciclos e evoluir!"
+    }
+
+};
+
+
+// Função para calcular a numerologia
+function calcularNumerologia() {
+
+    const dia = Number(document.getElementById("dia").value);
+    const mes = Number(document.getElementById("mes").value);
+    const ano = Number(document.getElementById("ano").value);
+
+    // Validação dos dados
+    const data = new Date(ano, mes - 1, dia);
+
+    if (
+        !Number.isInteger(dia) ||
+        !Number.isInteger(mes) ||
+        !Number.isInteger(ano) ||
+        dia < 1 || dia > 31 ||
+        mes < 1 || mes > 12 ||
+        ano < 1 ||
+        data.getFullYear() !== ano ||
+        data.getMonth() !== mes - 1 ||
+        data.getDate() !== dia
+    ) {
+        alert("Por favor, informe uma data válida!");
+        return;
+    }
+
+    // Soma dos algarismos do dia, mês e ano
+    const soma = (
+        String(dia) +
+        String(mes) +
+        String(ano)
+    ).split("").reduce((total, digito) => {
+        return total + Number(digito);
+    }, 0);
+
+    // Reduz até chegar a um número de 1 a 9
+    let numero = soma;
+
+    while (numero > 9) {
+        numero = String(numero)
+            .split("")
+            .reduce((total, digito) => {
+                return total + Number(digito);
+            }, 0);
+    }
+
+    // Busca os dados da cor
+    const resultado = cores[numero];
+
+    // Exibe o resultado
+    document.getElementById("numero").textContent = numero;
+
+    document.getElementById("nomeCor").textContent =
+        resultado.nome;
+
+    document.getElementById("significado").textContent =
+        resultado.significado;
+
+    document.getElementById("frase").textContent =
+        resultado.frase;
+
+    document.getElementById("amostra").style.backgroundColor =
+        resultado.cor;
+
+    document.getElementById("resultado").style.display =
+        "block";
+
+}
+
+</script>
+
+</body>
+</html>
