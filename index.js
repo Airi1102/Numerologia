@@ -1,4 +1,3 @@
-alert("O script carregou!");
 const tabela = {
   1: { cores: "Vermelho ou laranja", significado: "recomeços, coragem, liderança e movimento" },
   2: { cores: "Laranja ou rosa", significado: "parcerias, afeto, diálogo e conexões" },
