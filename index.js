@@ -1,4 +1,4 @@
-// Tabela com as cores e significados de cada número
+alert("O script carregou!");
 const tabela = {
   1: { cores: "Vermelho ou laranja", significado: "recomeços, coragem, liderança e movimento" },
   2: { cores: "Laranja ou rosa", significado: "parcerias, afeto, diálogo e conexões" },
@@ -10,7 +10,6 @@ const tabela = {
   8: { cores: "Rosa, marrom ou dourado", significado: "conquistas, prosperidade, equilíbrio e resultados" },
   9: { cores: "Dourado, verde, marrom ou violeta", significado: "encerramentos, renovação e fechamento de ciclos" }
 };
-
 
 function reduzirNumero(texto) {
   let soma = 0;
@@ -42,7 +41,7 @@ formulario.addEventListener("submit", function (evento) {
   const dia = Number(document.getElementById("dia").value);
   const mes = Number(document.getElementById("mes").value);
 
-
+  
   const diasNoMes = new Date(2024, mes, 0).getDate();
 
   if (dia < 1 || mes < 1 || mes > 12 || dia > diasNoMes) {
@@ -51,6 +50,7 @@ formulario.addEventListener("submit", function (evento) {
   }
 
   const proximoAno = new Date().getFullYear() + 1;
+
 
   const textoCompleto = String(dia) + String(mes) + String(proximoAno);
   const numero = reduzirNumero(textoCompleto);
